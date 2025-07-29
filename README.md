@@ -106,7 +106,8 @@ All code blocks are **cell‑by‑cell runnable**; each section is self‑contai
 ---
 
 ## ✨ Author
-**Mohammad Saleh Nikoopayan Tak** – PhD candidate @ NJIT | Urban Systems Tech | Data‑Science for the Built Environment  
-[LinkedIn](https://www.linkedin.com/in/nikoopayan) • [GitHub](https://github.com/mnikoopayan)
+**Mohammad Saleh Nikoopayan Tak** – PhD candidate @ NJIT | Data‑Science for the Built Environment  
+[LinkedIn](https://www.linkedin.com/in/mnikoopayan/) • [GitHub](https://github.com/mnikoopayan) • [Google Scholar](https://scholar.google.com/citations?user=wWVZoZ0AAAAJ&hl=en) • [ResearchGate](https://www.researchgate.net/profile/Mohammad-Saleh-Nikoopayan-Tak)
 
 *Open to collaborations and conversations on smart‑building data science!*
+
