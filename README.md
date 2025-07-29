@@ -8,7 +8,6 @@ Data cleaning ▶ feature engineering ▶ LSTM/CNN‑LSTM/Transformer ▶ anomal
 
 ## 🔥 Key Data‑Science Highlights
 
-
 | Skill | How it’s demonstrated here |
 |-------|---------------------------|
 | **Time‑series feature engineering** | Cyclical encodings (`sin/cos`), holiday/weekend flags, Isolation‑Forest outlier capping, hour‑level resampling. |
@@ -16,7 +15,7 @@ Data cleaning ▶ feature engineering ▶ LSTM/CNN‑LSTM/Transformer ▶ anomal
 | **Rigorous evaluation** | RMSE, MAE, R², **CV‑RMSE**, multi‑horizon error curves, hour‑of‑day error maps. |
 | **Transfer learning** | 72 % RMSE drop by fine‑tuning the champion model on a low‑data floor. |
 | **Anomaly analytics** | Mean + 3 σ threshold, 51 anomalies characterised by hour & weekday distributions. |
-| **Domain‑specific KPIs** | EUI (205.4 kWh m⁻² yr⁻¹), load factor, peak/base loads, daily archetype profiles. |
+| **Domain‑specific KPIs** | EUI **(205.4 kWh m⁻² yr⁻¹)**, load factor, peak/base loads, daily archetype profiles. |
 | **Reproducibility** | Global `np`/`tf` seeds, Conda `environment.yml`, exact hyper‑params logged, notebook + HTML render. |
 
 ---
@@ -26,7 +25,7 @@ Data cleaning ▶ feature engineering ▶ LSTM/CNN‑LSTM/Transformer ▶ anomal
 EnergyAI-TimeSeriesLab/
 ├── EnergyAI-TimeSeriesLab.ipynb   # main notebook (fully explained, runnable)
 ├── EnergyAI-TimeSeriesLab.html    # static render for quick browsing
-├── data/                          # (add Floor1‑7 CSVs here, .gitignored for size)
+├── dataset/                       # Floor1‑7 CSVs (tracked with Git LFS)
 ├── environment.yml                # conda spec for Apple‑Silicon + TensorFlow‑Metal
 └── README.md
 ```
@@ -39,10 +38,10 @@ EnergyAI-TimeSeriesLab/
 git clone https://github.com/mnikoopayan/EnergyAI-TimeSeriesLab.git
 cd EnergyAI-TimeSeriesLab
 conda env create -f environment.yml
-conda activate tf_m1      # same env used in the study
+conda activate tf_m1
 
-# 2️⃣  Drop the seven Floor*.csv files into ./data
-#     (Dataset originally part of the CU‑BEMS public release.)
+# 2️⃣  (If you fork) Pull the seven Floor*.csv files into ./dataset
+#     Files are tracked with Git LFS, so `git lfs pull` will fetch them.
 
 # 3️⃣  Launch the lab
 jupyter lab EnergyAI-TimeSeriesLab.ipynb
@@ -105,9 +104,17 @@ All code blocks are **cell‑by‑cell runnable**; each section is self‑contai
 
 ---
 
+## 📥 Data source & license
+*Dataset: CU‑BEMS — Smart‑building electricity & indoor environmental sensor data (one‑minute resolution, Jul 2018 – Dec 2019).  
+Chulalongkorn University, Bangkok; 11,700 m² academic office building.*
+
+* **Citation**: Pipattanasomporn M. *et al.* “CU‑BEMS, smart building electricity consumption and indoor environmental sensor datasets.” **Scientific Data** 7, 241 (2020). DOI: 10.1038/s41597‑020‑00582‑3.  
+* **License**: Creative Commons **CC‑BY 4.0** — free to share and adapt with attribution.
+
+---
+
 ## ✨ Author
 **Mohammad Saleh Nikoopayan Tak** – PhD candidate @ NJIT | Data‑Science for the Built Environment  
 [LinkedIn](https://www.linkedin.com/in/mnikoopayan/) • [GitHub](https://github.com/mnikoopayan) • [Google Scholar](https://scholar.google.com/citations?user=wWVZoZ0AAAAJ&hl=en) • [ResearchGate](https://www.researchgate.net/profile/Mohammad-Saleh-Nikoopayan-Tak)
 
 *Open to collaborations and conversations on smart‑building data science!*
-
