@@ -1,4 +1,4 @@
-# EnergyAI-TimeSeriesLab
+# CU-BEMS Probabilistic Building Energy Forecasting
 
 Reproducibility repository for the manuscript:
 
@@ -17,12 +17,12 @@ cross-floor transfer from Floor 6 to Floor 4.
 ## Repository Contents
 
 ```text
-EnergyAI-TimeSeriesLab/
+CU-BEMS-Probabilistic-Building-Energy-Forecasting/
 ├── data/
 │   ├── README.md
 │   └── raw/                         # CU-BEMS Floor1-Floor7 CSVs via Git LFS
 ├── notebooks/
-│   └── EnergyAI-TimeSeriesLab.ipynb  # output-cleared analysis notebook
+│   └── cu_bems_probabilistic_building_energy_forecasting.ipynb
 ├── outputs/
 │   ├── figures/                     # saved analysis figures
 │   ├── figures/manuscript/          # final manuscript and composite figures
@@ -71,7 +71,7 @@ pip install -r requirements.txt
 Run the main notebook from the repository root:
 
 ```bash
-jupyter lab notebooks/EnergyAI-TimeSeriesLab.ipynb
+jupyter lab notebooks/cu_bems_probabilistic_building_energy_forecasting.ipynb
 ```
 
 The strict few-shot transfer search is intentionally separated into a script

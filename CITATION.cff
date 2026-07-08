@@ -1,6 +1,6 @@
 cff-version: 1.2.0
 message: "If you use this repository, please cite the associated manuscript and the CU-BEMS dataset paper."
-title: "EnergyAI-TimeSeriesLab: Probabilistic Deep Learning for Building Energy Forecasting"
+title: "CU-BEMS Probabilistic Building Energy Forecasting: Reproducibility Repository"
 authors:
   - family-names: "Nikoopayan Tak"
     given-names: "Mohammad Saleh"
@@ -12,7 +12,7 @@ authors:
     given-names: "Zijian"
   - family-names: "Feng"
     given-names: "Yanxiao"
-repository-code: "https://github.com/mnikoopayan/EnergyAI-TimeSeriesLab"
+repository-code: "https://github.com/mnikoopayan/CU-BEMS-Probabilistic-Building-Energy-Forecasting"
 type: software
 keywords:
   - building energy forecasting
