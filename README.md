@@ -22,7 +22,7 @@ EnergyAI-TimeSeriesLab/
 │   ├── README.md
 │   └── raw/                         # CU-BEMS Floor1-Floor7 CSVs via Git LFS
 ├── notebooks/
-│   ├── EnergyAI-TimeSeriesLab.ipynb  # output-cleared analysis notebook
+│   └── EnergyAI-TimeSeriesLab.ipynb  # output-cleared analysis notebook
 ├── outputs/
 │   ├── figures/                     # saved analysis figures
 │   ├── figures/manuscript/          # final manuscript and composite figures
