@@ -1,0 +1,14 @@
+Stage,Protocol,Preprocess,Fine-Tune Strategy,Optimization,Loss Strategy,Evaluation Split,Validation Transfer RMSE Mean (kWh),Validation Transfer RMSE Std (kWh),Validation Transfer RMSE 95% CI Half Width (kWh),Validation Scratch RMSE Mean (kWh),Validation Paired Improvement Mean (kWh),Windows
+stage1_preprocess,strict_primary,family_minmax,head_only,default,quantile_loss,val,29.816651050231854,3.379297536584135,3.546355272704096,29.308303128851122,-0.5083479213807358,6
+stage1_preprocess,strict_primary,family_standard,head_only,default,quantile_loss,val,27.751697299357545,2.4111213476103375,2.530316674296323,27.58933397067494,-0.16236332868260975,6
+stage1_preprocess,strict_primary,family_robust,head_only,default,quantile_loss,val,29.66068652721123,3.6827079629054835,3.8647649876017534,27.437266955219314,-2.2234195719919136,6
+stage2_fine_tuning,strict_primary,family_standard,head_only,default,quantile_loss,val,27.751697299357545,2.4111213476103375,2.530316674296323,27.58933397067494,-0.16236332868260975,6
+stage2_fine_tuning,strict_primary,family_standard,last_recurrent_block,default,quantile_loss,val,23.014336112019176,5.83241854255293,6.1207478853452395,32.776848793816235,9.762512681797059,6
+stage2_fine_tuning,strict_primary,family_standard,last_two_blocks,default,quantile_loss,val,21.608605241471206,8.213360661310464,8.619393401298852,30.158058585075555,8.54945334360435,6
+stage2_fine_tuning,strict_primary,family_standard,full_model_tiny_lr,default,quantile_loss,val,29.082456029545483,7.233378730656095,7.590965436816082,29.754106746544323,0.6716507169988416,6
+stage3_optimization,strict_primary,family_standard,last_two_blocks,default,quantile_loss,val,21.608605241471206,8.213360661310464,8.619393401298852,30.158058585075555,8.54945334360435,6
+stage3_optimization,strict_primary,family_standard,last_two_blocks,small_batch_longer_patience,quantile_loss,val,21.43620616394658,8.430533994063689,8.847302836725076,28.554896036737087,7.1186898727905055,6
+stage3_optimization,strict_primary,family_standard,last_two_blocks,low_lr_clipped,quantile_loss,val,24.39926893307073,6.798691184281293,7.134788833431427,30.96271147847757,6.563442545406841,6
+stage4_loss_alignment,strict_primary,family_standard,last_two_blocks,small_batch_longer_patience,quantile_loss,val,21.43620616394658,8.430533994063689,8.847302836725076,28.554896036737087,7.1186898727905055,6
+stage4_loss_alignment,strict_primary,family_standard,last_two_blocks,small_batch_longer_patience,weighted_median_quantile,val,21.245871007904427,8.739173721184494,9.171200366253421,32.03954599958532,10.793674991680897,6
+stage4_loss_alignment,strict_primary,family_standard,last_two_blocks,small_batch_longer_patience,two_stage_weighted_then_quantile,val,21.612034061341536,8.43189753322281,8.848733783315051,30.959459130623586,9.347425069282046,6

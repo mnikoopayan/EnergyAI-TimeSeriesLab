@@ -1,3 +1,10 @@
-.ipynb_checkpoints/
 .DS_Store
-dataset/
+.ipynb_checkpoints/
+__pycache__/
+.cache/
+.meteostat/
+.mplconfig/
+.venv/
+notebooks/hyperparameter_tuning/
+outputs/models/
+data/processed/

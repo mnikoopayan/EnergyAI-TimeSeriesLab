@@ -1,120 +1,152 @@
+# EnergyAI-TimeSeriesLab
 
-# EnergyAI‑TimeSeriesLab
+Reproducibility repository for the manuscript:
 
-**End‑to‑end deep‑learning pipeline for smart‑building power data**  
-Data cleaning ▶ feature engineering ▶ LSTM/CNN‑LSTM/Transformer ▶ anomaly detection ▶ transfer learning.
+**An Explainable Probabilistic Deep Learning Framework for Building Energy
+Forecasting: Multi Horizon Prediction, Anomaly Detection, and Few Shot Transfer
+Learning**
 
----
+This repository contains the analysis notebook, reusable helper code, saved
+metrics, and figure artifacts used for the CU-BEMS building energy forecasting
+study. The workflow benchmarks probabilistic LSTM, CNN-LSTM, and Transformer
+models; selects a CNN-LSTM champion; extends it to multi-horizon quantile
+forecasting; screens candidate operational anomalies with prediction intervals;
+uses SHAP for local and global explanation; and evaluates strict few-shot
+cross-floor transfer from Floor 6 to Floor 4.
 
-## 🔥 Key Data‑Science Highlights
+## Repository Contents
 
-| Skill | How it’s demonstrated here |
-|-------|---------------------------|
-| **Time‑series feature engineering** | Cyclical encodings (`sin/cos`), holiday/weekend flags, Isolation‑Forest outlier capping, hour‑level resampling. |
-| **Model development at scale** | LSTM, CNN‑LSTM, and Transformer architectures **Bayesian‑tuned** with Keras Tuner. |
-| **Rigorous evaluation** | RMSE, MAE, R², **CV‑RMSE**, multi‑horizon error curves, hour‑of‑day error maps. |
-| **Transfer learning** | 72 % RMSE drop by fine‑tuning the champion model on a low‑data floor. |
-| **Anomaly analytics** | Mean + 3 σ threshold, 51 anomalies characterised by hour & weekday distributions. |
-| **Domain‑specific KPIs** | EUI **(205.4 kWh m⁻² yr⁻¹)**, load factor, peak/base loads, daily archetype profiles. |
-| **Reproducibility** | Global `np`/`tf` seeds, Conda `environment.yml`, exact hyper‑params logged, notebook + HTML render. |
-
----
-
-## 📂 Repository structure
 ```text
 EnergyAI-TimeSeriesLab/
-├── EnergyAI-TimeSeriesLab.ipynb   # main notebook (fully explained, runnable)
-├── EnergyAI-TimeSeriesLab.html    # static render for quick browsing
-├── dataset/                       # Floor1‑7 CSVs (tracked with Git LFS)
-├── environment.yml                # conda spec for Apple‑Silicon + TensorFlow‑Metal
+├── data/
+│   ├── README.md
+│   └── raw/                         # CU-BEMS Floor1-Floor7 CSVs via Git LFS
+├── notebooks/
+│   ├── EnergyAI-TimeSeriesLab.ipynb  # output-cleared analysis notebook
+├── outputs/
+│   ├── figures/                     # saved analysis figures
+│   ├── figures/manuscript/          # final manuscript and composite figures
+│   ├── metrics/                     # saved CSV metrics used in tables
+│   └── README.md
+├── scripts/
+│   └── run_few_shot_protocol_search.py
+├── src/
+│   └── utils.py
+├── requirements.txt
 └── README.md
 ```
 
----
+## Data
 
-## 🚀 Quick start
+The study uses the CU-BEMS dataset collected from Chamchuri 5 at Chulalongkorn
+University. The raw floor-level CSV files are tracked in `data/raw/` with Git
+LFS. If the CSV files do not download automatically after cloning, run:
+
 ```bash
-# 1️⃣  Clone + set up env
-git clone https://github.com/mnikoopayan/EnergyAI-TimeSeriesLab.git
-cd EnergyAI-TimeSeriesLab
-conda env create -f environment.yml
-conda activate tf_m1
-
-# 2️⃣  (If you fork) Pull the seven Floor*.csv files into ./dataset
-#     Files are tracked with Git LFS, so `git lfs pull` will fetch them.
-
-# 3️⃣  Launch the lab
-jupyter lab EnergyAI-TimeSeriesLab.ipynb
+git lfs install
+git lfs pull
 ```
 
-All code blocks are **cell‑by‑cell runnable**; each section is self‑contained so you can jump straight to modelling or anomaly analytics.
+Dataset citation:
 
----
+Pipattanasomporn, M. et al. CU-BEMS, smart building electricity consumption and
+indoor environmental sensor datasets. *Scientific Data* 7, 241 (2020).
+https://doi.org/10.1038/s41597-020-00582-3
 
-## 📊 Key results
+## Environment
 
-### One‑step‑ahead forecasting (test set, Floor 6)
-| Model | RMSE (kWh) | MAE (kWh) | R² | CV‑RMSE (%) | Train time |
-|-------|-----------:|----------:|---:|------------:|-----------:|
-| **Tuned LSTM** | **3.62** | 2.17 | 0.986 | 16.5 | 203 s |
-| CNN‑LSTM | 3.71 | 2.18 | 0.985 | 16.9 | 314 s |
-| Transformer | 4.29 | 2.42 | 0.981 | 19.6 | 422 s |
+The original profiling was performed on an Apple M1 system with 8 GB unified
+memory using TensorFlow-Metal and Metal Performance Shaders acceleration. The
+code also runs on CPU or standard TensorFlow GPU environments, although timing
+results will be hardware dependent.
 
-### Multi‑horizon champion (tuned LSTM)
-| Horizon | RMSE | MAE | R² | NMAE % |
-|---------|-----:|----:|---:|-------:|
-| 1 h | 4.22 | 2.59 | 0.981 | 11.9 |
-| 3 h | 4.89 | 2.92 | 0.975 | 13.4 |
-| 6 h | 4.92 | 3.02 | 0.974 | 13.8 |
-| 12 h | 6.71 | 3.56 | 0.952 | 16.4 |
-| 24 h | 8.13 | 4.00 | 0.929 | 18.4 |
+```bash
+python -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+```
 
-### Transfer learning (Floor 4, low‑data July 2018)
-| Strategy | Test RMSE |
-|----------|----------:|
-| Train from scratch | 20.78 kWh |
-| **Fine‑tuned champion** | **5.76 kWh** |
+## Reproducing the Analysis
 
-> **Δ = ‑72 %** error — showcases how pretrained sequence encoders cut data requirements.
+Run the main notebook from the repository root:
 
----
+```bash
+jupyter lab notebooks/EnergyAI-TimeSeriesLab.ipynb
+```
 
-## 🧐 Project story
-1. **Data wrangling** – 689 128 rows × 30 sensor channels (per floor) cleaned; power → energy via hourly means.  
-2. **Feature factory** – time & cyclical features, holiday flags, Isolation‑Forest capping at 99.5 % quantile.  
-3. **Model zoo** – three deep‑learning families, **Bayesian‑optimised** then fully trained with early‑stopping.  
-4. **Champion selection** – LSTM wins on RMSE + compute cost; extended to multi‑output forecaster.  
-5. **Explainability hooks** – predictions‑vs‑actuals plots, error heat‑maps, anomaly visualisations.  
-6. **Cross‑floor transfer** – demonstrate model reuse when Phase‑II deployment data are scarce.  
-7. **Building KPIs** – EUI, load factor, weekday/weekend archetypes for facility ops teams.
+The strict few-shot transfer search is intentionally separated into a script
+because it is computationally expensive:
 
----
+```bash
+python scripts/run_few_shot_protocol_search.py
+```
 
-## 📌 Requirements
-* Python ≥ 3.10  
-* TensorFlow 2.16 + Metal for Apple Silicon (`environment.yml`)  
-* keras‑tuner, scikit‑learn, seaborn, pandas, matplotlib  
+Saved outputs are already provided for reproducibility checks:
 
----
+- `outputs/metrics/probabilistic_one_step_five_seed_summary.csv`
+- `outputs/metrics/probabilistic_one_step_five_seed_per_seed.csv`
+- `outputs/metrics/probabilistic_multi_horizon_metrics.csv`
+- `outputs/metrics/probabilistic_anomalies_summary.csv`
+- `outputs/metrics/strict_best_recipe_test_summary.csv`
+- `outputs/metrics/strict_best_recipe_per_window_test.csv`
+- `outputs/metrics/compute_profiling.csv`
 
-## ▶️ Next milestones
-* Integrate weather covariates (dry‑bulb, dew‑point) via API pull.  
-* Serve forecasts through FastAPI + Streamlit dashboard.  
-* Extend transfer‑learning demo to unseen buildings (domain adaptation).
+## Manuscript-Aligned Results
 
----
+### One-step benchmark on Floor 6
 
-## 📥 Data source & license
-*Dataset: CU‑BEMS — Smart‑building electricity & indoor environmental sensor data (one‑minute resolution, Jul 2018 – Dec 2019).  
-Chulalongkorn University, Bangkok; 11,700 m² academic office building.*
+The final manuscript reports the neural models as mean (SD) over five fixed
+architecture random-seed runs. Zero-training baselines are reported separately
+in `outputs/metrics/zero_training_baselines.csv`.
 
-* **Citation**: Pipattanasomporn M. *et al.* “CU‑BEMS, smart building electricity consumption and indoor environmental sensor datasets.” **Scientific Data** 7, 241 (2020). DOI: 10.1038/s41597‑020‑00582‑3.  
-* **License**: Creative Commons **CC‑BY 4.0** — free to share and adapt with attribution.
+| Model | Mean pinball loss (kWh) | RMSE (kWh) | MAE (kWh) | R-squared | CV(RMSE) (%) | PICP (%) | MPIW (kWh) |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| LSTM | 0.613 (0.026) | 3.982 (0.148) | 2.293 (0.108) | 0.9830 (0.0013) | 17.91 (0.67) | 86.66 (1.00) | 8.42 (0.52) |
+| CNN-LSTM | 0.561 (0.021) | 3.753 (0.198) | 2.062 (0.079) | 0.9849 (0.0016) | 16.88 (0.89) | 90.09 (0.81) | 9.36 (0.47) |
+| Transformer | 0.813 (0.145) | 4.814 (0.883) | 2.945 (0.557) | 0.9746 (0.0094) | 21.66 (3.97) | 95.74 (2.30) | 17.33 (4.19) |
 
----
+### Multi-horizon CNN-LSTM forecasting
 
-## ✨ Author
-**Mohammad Saleh Nikoopayan Tak** – PhD candidate @ NJIT | Data‑Science for the Built Environment  
-[LinkedIn](https://www.linkedin.com/in/mnikoopayan/) • [GitHub](https://github.com/mnikoopayan) • [Google Scholar](https://scholar.google.com/citations?user=wWVZoZ0AAAAJ&hl=en) • [ResearchGate](https://www.researchgate.net/profile/Mohammad-Saleh-Nikoopayan-Tak)
+| Horizon | RMSE (kWh) | MAE (kWh) | R-squared | PICP (%) | MPIW (kWh) |
+|---:|---:|---:|---:|---:|---:|
+| 1 h | 4.372 | 2.552 | 0.9794 | 95.29 | 15.67 |
+| 3 h | 4.535 | 2.752 | 0.9779 | 95.53 | 16.34 |
+| 6 h | 4.581 | 2.661 | 0.9774 | 95.47 | 17.14 |
+| 12 h | 5.910 | 2.961 | 0.9624 | 96.48 | 21.17 |
+| 24 h | 6.367 | 3.040 | 0.9561 | 96.42 | 22.25 |
 
-*Open to collaborations and conversations on smart‑building data science!*
+### Candidate anomaly screening
+
+The q05 to q95 interval rule identified 132 candidate operational anomalies in
+the Floor 6 test period. These are review candidates, not confirmed faults.
+The supporting summary is in
+`outputs/metrics/probabilistic_anomalies_summary.csv`.
+
+### Strict few-shot transfer from Floor 6 to Floor 4
+
+The strict transfer experiment evaluates ten non-overlapping Floor 4 windows
+for each labeled-data budget and compares scratch training with transfer
+initialization from the Floor 6 CNN-LSTM champion.
+
+| Training budget | Windows | Scratch RMSE mean (kWh) | Transfer RMSE mean (kWh) | Paired improvement mean (kWh) |
+|---|---:|---:|---:|---:|
+| 1 day | 10 | 35.12 | 24.45 | 10.67 |
+| 3 days | 10 | 41.12 | 21.38 | 19.74 |
+| 7 days | 10 | 36.17 | 18.17 | 18.01 |
+| 14 days | 10 | 26.71 | 17.17 | 9.54 |
+| All windows | 40 | 34.78 | 20.29 | 14.49 |
+
+## Notes on Scope
+
+The repository is intended to support manuscript reproducibility. It does not
+claim that interval exceedances are confirmed equipment faults, and the SHAP
+analysis explains the total-load model rather than separate end-use channels.
+Raw CU-BEMS AC, lighting, and plug-load channels are available in the floor CSV
+files for post-hoc operational review and future channel-level modeling.
+
+## License and Attribution
+
+The CU-BEMS dataset is distributed by its original authors under the terms
+stated with the dataset publication. Please cite the CU-BEMS Scientific Data
+paper when using the data. Code and derived analysis artifacts in this
+repository are provided for research reproducibility.

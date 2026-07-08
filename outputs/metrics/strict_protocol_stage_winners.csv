@@ -1,0 +1,5 @@
+Stage,Winner
+stage1_preprocess,family_standard
+stage2_fine_tuning,last_two_blocks
+stage3_optimization,small_batch_longer_patience
+stage4_loss_alignment,weighted_median_quantile

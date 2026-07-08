@@ -1,0 +1,3 @@
+Model,RMSE_kWh,MAE_kWh,R2,CVRMSE_percent,PICP_percent,MPIW_kWh,Notes
+Naive persistence,19.503383937474553,9.422058746041088,0.5935805596341068,87.7345311449442,,,Zero-training deterministic baseline aligned to the one-step 24-hour-lookback test targets
+Seasonal naive (24 h),23.733746260196067,10.034128422881809,0.3981515824383347,106.76450338704673,,,Zero-training deterministic baseline aligned to the one-step 24-hour-lookback test targets

@@ -1,0 +1,2 @@
+Model,Total Parameters,Trainable Parameters,Non-Trainable Parameters,Inference Time on Test Set (s),Inference Latency (ms/sample),Test Samples
+Tuned CNN-LSTM Champion,364159,364159,0,1.880818083009217,1.1070147633956546,1699

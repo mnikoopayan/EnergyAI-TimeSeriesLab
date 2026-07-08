@@ -1,0 +1,31 @@
+Figure ID,filename,description
+Fig01,Fig01_outlier_handling_comparison.pdf,outlier handling comparison
+Fig01,Fig01_outlier_handling_comparison.png,outlier handling comparison
+Fig02,Fig02_hourly_energy_consumption_patterns.pdf,hourly energy consumption patterns
+Fig02,Fig02_hourly_energy_consumption_patterns.png,hourly energy consumption patterns
+Fig03,Fig03_weekday_energy_consumption_patterns.pdf,weekday energy consumption patterns
+Fig03,Fig03_weekday_energy_consumption_patterns.png,weekday energy consumption patterns
+Fig04,Fig04_lstm_training_history.pdf,lstm training history
+Fig04,Fig04_lstm_training_history.png,lstm training history
+Fig05,Fig05_lstm_test_predictions.pdf,lstm test predictions
+Fig05,Fig05_lstm_test_predictions.png,lstm test predictions
+Fig06,Fig06_cnn_lstm_training_history.pdf,cnn lstm training history
+Fig06,Fig06_cnn_lstm_training_history.png,cnn lstm training history
+Fig07,Fig07_cnn_lstm_test_predictions.pdf,cnn lstm test predictions
+Fig07,Fig07_cnn_lstm_test_predictions.png,cnn lstm test predictions
+Fig08,Fig08_transformer_training_history.pdf,transformer training history
+Fig08,Fig08_transformer_training_history.png,transformer training history
+Fig09,Fig09_transformer_test_predictions.pdf,transformer test predictions
+Fig09,Fig09_transformer_test_predictions.png,transformer test predictions
+Fig10,Fig10_multi_horizon_probabilistic_degradation.pdf,multi horizon probabilistic degradation
+Fig10,Fig10_multi_horizon_probabilistic_degradation.png,multi horizon probabilistic degradation
+Fig11,Fig11_uncertainty_aware_anomalies.pdf,uncertainty aware anomalies
+Fig11,Fig11_uncertainty_aware_anomalies.png,uncertainty aware anomalies
+Fig12,Fig12_uncertainty_aware_anomaly_frequency_by_hour.pdf,uncertainty aware anomaly frequency by hour
+Fig12,Fig12_uncertainty_aware_anomaly_frequency_by_hour.png,uncertainty aware anomaly frequency by hour
+Fig13,Fig13_uncertainty_aware_anomaly_frequency_by_day.pdf,uncertainty aware anomaly frequency by day
+Fig13,Fig13_uncertainty_aware_anomaly_frequency_by_day.png,uncertainty aware anomaly frequency by day
+Fig14,Fig14_shap_global_summary.pdf,shap global summary
+Fig14,Fig14_shap_global_summary.png,shap global summary
+Fig15,Fig15_shap_anomaly_explanation.pdf,shap anomaly explanation
+Fig15,Fig15_shap_anomaly_explanation.png,shap anomaly explanation

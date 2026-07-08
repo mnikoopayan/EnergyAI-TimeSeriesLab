@@ -1,0 +1,11 @@
+numpy==1.26.4
+pandas==2.2.2
+scikit-learn==1.5.1
+tensorflow==2.16.2
+matplotlib==3.8.4
+seaborn==0.13.2
+keras-tuner==1.4.8
+meteostat==1.6.8
+shap==0.46.0
+# Apple Silicon only
+tensorflow-metal==1.2.0
